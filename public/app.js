@@ -33,44 +33,43 @@ function displayButtons(){
 
 function displayResults(search, type, offset){
 
+
+    // Empty out the images div and replace after API call
+    if(!offset){ $('#images-display').empty(); };
+    $('#show-more').empty();
+
+    //Update the offset to display more gifs
+    let newOffset = offset * 10;
+
+
+    // //EB
+    // //Define variables for API call
+
+    let appendURL = '';
+
+    switch (type){
+        case 'location': 
+            appendURL = `&location.address=${search}`;
+            break;
+        case 'search':
+            appendURL = `&q=${search}`;
+            break;
+    }
+
+    // let queryUrl = `https://www.eventbriteapi.com/v3/events/search/?token=&categories=110&price=paid${appendURL}`;
+
+
+    //Make API call to display results of search query
     $.ajax({
         method: "GET",
-        url: "/scrape/"
+        url: "/scrape/" + appendURL
       })
         // With that done, add the note information to the page
         .then(function(data) {
           console.log(data);
         })
 
-  
 
-    //Empty out the images div and replace after API call
-    // if(!offset){ $('#images-display').empty(); };
-    // $('#show-more').empty();
-
-    // //Update the offset to display more gifs
-    // let newOffset = offset * 10;
-
-
-
-    // //EB
-    // //Define variables for API call
-    // //Can assume the search is a city right now
-
-    // let appendURL = '';
-
-    // switch (type){
-    //     case 'location': 
-    //         appendURL = `&location.address=${search}`;
-    //         break;
-    //     case 'search':
-    //         appendURL = `&q=${search}`;
-    //         break;
-    // }
-
-    // let queryUrl = `https://www.eventbriteapi.com/v3/events/search/?token=&categories=110&price=paid${appendURL}`;
-
-    // // let queryUrl = `https://www.eventbriteapi.com/v3/events/search/?token=&categories=110&location.address=${search}`;
     
 
     // console.log(queryUrl);
