@@ -1,0 +1,89 @@
+html, body{
+
+    height: 100%;
+    bottom: 0;
+
+}
+.body{
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("http://www.caingram.info/Scotland/Glasgow/glasgow_map_3.jpg");
+    min-height: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.text{
+   margin-bottom: 5px;
+}
+
+.button {
+    background-color: rgb(54, 97, 162);
+    border: none;
+    color: white;
+    margin: 3px;
+    padding: 5px;
+    text-align: center;
+}
+
+input[type=text] {
+    padding: 5px;
+}
+
+input[type=submit] {
+    background-color: #3661A2;
+    border: none;
+    color: white;
+    margin: 3px;
+    padding: 5px;
+    text-align: center;
+}
+
+.header-wrapper{
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    background-color: white;
+    box-shadow: 0px 1px 2px #a3a3a3;
+}
+
+.header-item{
+    margin: 1vw;
+}
+
+.images-display{
+    display: flex;
+    margin: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.gif{
+    margin: 0.5rem;
+    border: 1px solid gainsboro;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 0.5rem;
+}
+
+.gif-image {
+    max-width: 500px;
+}
+
+.show-more{
+    margin: 5px;
+    display: flex;
+    flex-direction: row;
+}
+
+.more{
+    margin-left: 5px;
+    font-size: 80%;
+}
+
+
+@media screen and (max-width: 640px) {
+    .gif-image{
+        max-width: 250px;
+    }
+}
