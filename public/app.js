@@ -1,3 +1,4 @@
+let debug=false;
 
 //VARIABLES
 let citiesList = ["san diego", "new york", "los angeles", "chicago", "san francisco", "miami", "seattle", "nashville", "dallas", "austin", "boston", "portland","denver"];
@@ -68,6 +69,39 @@ function displayResults(search, type, offset){
         .then(function(data) {
             console.log("Back in app.js" + data);
 
+            if(debug){
+                data = [ 
+                    {
+                        "name": {
+                            "text": "Testing123"
+                        },
+                        "start": {
+                            "local": "DATE HERE"
+                        },
+                        "url": "https://www.google.com"
+                    },
+                    {
+                        "name": {
+                            "text": "Testing123"
+                        },
+                        "start": {
+                            "local": "DATE HERE"
+                        },
+                        "url": "https://www.google.com"
+                    },
+                    {
+                        "name": {
+                            "text": "Testing123"
+                        },
+                        "start": {
+                            "local": "DATE HERE"
+                        },
+                        "url": "https://www.google.com"
+                    }
+
+                ]
+            }
+
             data.forEach(function(item){
 
 
@@ -76,9 +110,10 @@ function displayResults(search, type, offset){
                 // let movingUrl = item.images.fixed_height.url;
                 // let rating = item.rating;
 
-                    // let eventLogo= item.logo.original.url;
+                    //Add placeholder logo if one doesn't exist
+                    let eventLogo= 'https://carepharmaceuticals.com.au/wp-content/uploads/sites/19/2018/02/placeholder-600x400.png';
 
-                    if(item.logo) {let eventLogo= item.logo.original.url;}
+                    if(item.logo) {eventLogo= item.logo.original.url;}
                     let eventName = item.name.text;
                     let eventDate = item.start.local;
                     let eventURL = item.url;
@@ -87,102 +122,34 @@ function displayResults(search, type, offset){
 
                     //Create a div to display the gif in 
                     // let gifDiv = 
-                    // `<div class="gif">
-                    //     <img src="${stillUrl}" class="gif-image" id="gif-image" data-still="${stillUrl}" data-moving="${movingUrl}" data-motion="0">
-                    //     <p>Rating: ${rating}</p>
-                    // </div>`;
-
-
-                    //Create a div to display the gif in 
-                    let gifDiv = 
-                    `<div class="gif">
-                        <p>${eventName}</p>
-                        <p>${eventDate}</p>
-                        <p><a href="${eventURL}">Link</a></p>
-                    </div>`;
-
-                    // let gifDiv = 
-                    // `<div class="gif">
-                    //     <img src="${eventLogo}" class="gif-image" id="gif-image" data-motion="0">
+                    // `<div class="event-item">
+                    //     <img src="${eventLogo}" class="gif-image" id="gif-image"><br>
                     //     <p>${eventName}</p>
                     //     <p>${eventDate}</p>
                     //     <p><a href="${eventURL}">Link</a></p>
                     // </div>`;
 
 
+                    let gifDiv = 
+                    `<div class="event-item">
+                            <div class="img-container">
+                                <img src="${eventLogo}" class="gif-image" id="gif-image">
+                            </div>
+                            <div class="event-info-container">
+                                <p><a href="${eventURL}" class="event-name">${eventName}</a></p>
+                                <p>${eventDate}</p>
+                            </div>
+                    </div>`;
+                    
+
+
+
                     //Append the div to the dom
-                    $("#images-display").prepend(gifDiv);
+                    $("#events-display").prepend(gifDiv);
 
             })
 
         })
-
-
-    
-
-    // console.log(queryUrl);
-
-    // //Make the ajax call to get the gifs with the specified url
-    // $.ajax({
-    //     url: queryUrl,
-    //     method: "GET"
-    // }).then(function(response){
-
-    //     // console.log(response);
-
-    //     let results = response.events;
-
-    //     console.log(results.length);
-    //     let num=0; 
-
-    //     results.forEach(function(item){
-
-    //         console.log(item);
-    //         console.log(num++)
-
-    //         //Create variables
-    //         // let stillUrl = item.images.fixed_height_still.url;
-    //         // let movingUrl = item.images.fixed_height.url;
-    //         // let rating = item.rating;
-
-    //             // let eventLogo= item.logo.original.url;
-
-    //             if(item.logo) {let eventLogo= item.logo.original.url;}
-    //             let eventName = item.name.text;
-    //             let eventDate = item.start.local;
-    //             let eventURL = item.url;
-
-    //             console.log(eventURL);
-
-    //             //Create a div to display the gif in 
-    //             // let gifDiv = 
-    //             // `<div class="gif">
-    //             //     <img src="${stillUrl}" class="gif-image" id="gif-image" data-still="${stillUrl}" data-moving="${movingUrl}" data-motion="0">
-    //             //     <p>Rating: ${rating}</p>
-    //             // </div>`;
-
-
-    //             //Create a div to display the gif in 
-    //             let gifDiv = 
-    //             `<div class="gif">
-    //                 <p>${eventName}</p>
-    //                 <p>${eventDate}</p>
-    //                 <p><a href="${eventURL}">Link</a></p>
-    //             </div>`;
-
-    //             // let gifDiv = 
-    //             // `<div class="gif">
-    //             //     <img src="${eventLogo}" class="gif-image" id="gif-image" data-motion="0">
-    //             //     <p>${eventName}</p>
-    //             //     <p>${eventDate}</p>
-    //             //     <p><a href="${eventURL}">Link</a></p>
-    //             // </div>`;
-
-
-    //             //Append the div to the dom
-    //             $("#images-display").prepend(gifDiv);
-
-    //     });
 
     //     //Create new html to hold the "Show More" functionality 
     //     let showMore = 

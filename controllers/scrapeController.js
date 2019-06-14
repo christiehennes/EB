@@ -1,3 +1,4 @@
+let debug=false;
 var express = require("express");
 
 var router = express.Router();
@@ -36,20 +37,29 @@ router.get("/scrape/:query", function(req, res) {
 
 
     //Make the API Call
-    axios.get(queryUrl).then(function(response){
+
+    if(!debug){
+        axios.get(queryUrl).then(function(response){
 
 
-        //Print to console in nice format 
-        // console.log(JSON.stringify(response.data.events));
+            //Print to console in nice format 
+            // console.log(JSON.stringify(response.data.events));
+    
+            results = response.data.events;
+    
+            console.log(results.length);
+    
+            //Send results back to the client to display on page
+            res.send(results);
+    
+        })
 
-        results = response.data.events;
+    }
+    else{
+        
+        res.send("Complete In Debug Mode")
+    }
 
-        console.log(results.length);
-
-        //Send results back to the client to display on page
-        res.send(results);
-
-    })
 
 
 
