@@ -7,7 +7,6 @@ let localOffset = 0; //Create an offset to add more gifs on page
 let currentSearch = ''; //To update with current search term
 
 //Start the App
-console.log("Running123");
 displayButtons();
 
 
@@ -57,9 +56,6 @@ function displayResults(search, type, offset){
             break;
     }
 
-    // let queryUrl = `https://www.eventbriteapi.com/v3/events/search/?token=&categories=110&price=paid${appendURL}`;
-
-
     //Make API call to display results of search query
     $.ajax({
         method: "GET",
@@ -67,7 +63,7 @@ function displayResults(search, type, offset){
       })
         // With that done, add the note information to the page
         .then(function(data) {
-            console.log("Back in app.js" + data);
+            // console.log("Back in app.js" + data);
 
             if(debug){
                 data = [ 
@@ -104,48 +100,34 @@ function displayResults(search, type, offset){
 
             data.forEach(function(item){
 
+                //Add placeholder logo if one doesn't exist
+                let eventLogo= 'https://carepharmaceuticals.com.au/wp-content/uploads/sites/19/2018/02/placeholder-600x400.png';
 
-                //Create variables
-                // let stillUrl = item.images.fixed_height_still.url;
-                // let movingUrl = item.images.fixed_height.url;
-                // let rating = item.rating;
+                if(item.logo) {eventLogo= item.logo.original.url;}
+                let eventName = item.name.text;
+                let eventDate = new Date(item.start.local);
+                eventDate = moment.utc(eventDate).format("LL")
+                let eventURL = item.url;
 
-                    //Add placeholder logo if one doesn't exist
-                    let eventLogo= 'https://carepharmaceuticals.com.au/wp-content/uploads/sites/19/2018/02/placeholder-600x400.png';
+                // console.log(eventURL);
 
-                    if(item.logo) {eventLogo= item.logo.original.url;}
-                    let eventName = item.name.text;
-                    let eventDate = item.start.local;
-                    let eventURL = item.url;
-
-                    console.log(eventURL);
-
-                    //Create a div to display the gif in 
-                    // let gifDiv = 
-                    // `<div class="event-item">
-                    //     <img src="${eventLogo}" class="gif-image" id="gif-image"><br>
-                    //     <p>${eventName}</p>
-                    //     <p>${eventDate}</p>
-                    //     <p><a href="${eventURL}">Link</a></p>
-                    // </div>`;
-
-
-                    let gifDiv = 
-                    `<div class="event-item">
-                            <div class="img-container">
-                                <img src="${eventLogo}" class="gif-image" id="gif-image">
-                            </div>
-                            <div class="event-info-container">
-                                <p><a href="${eventURL}" class="event-name">${eventName}</a></p>
-                                <p>${eventDate}</p>
-                            </div>
-                    </div>`;
-                    
+                //Create the div to display event info on the screen
+                let eventDiv = 
+                `<div class="event-item">
+                        <div class="img-container">
+                            <img src="${eventLogo}" class="gif-image" id="gif-image">
+                        </div>
+                        <div class="event-info-container">
+                            <p><a href="${eventURL}" class="event-name">${eventName}</a></p>
+                            <p>${eventDate}</p>
+                        </div>
+                </div>`;
+                
 
 
 
-                    //Append the div to the dom
-                    $("#events-display").prepend(gifDiv);
+                //Append the div to the dom
+                $("#events-display").append(eventDiv);
 
             })
 
@@ -172,6 +154,6 @@ $(document).on("click", ".button", function(){
     currentSearch = search;
     localOffset = 0;
 
-    console.log(search + " was clicked");
+    // console.log(search + " was clicked");
     displayResults(search, type, localOffset);
 });

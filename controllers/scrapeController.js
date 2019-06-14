@@ -29,7 +29,7 @@ router.get("/scrape/:query", function(req, res) {
 
     //Currently ONLY looking in the F&B Category (110)
     // TODO, update to let you search by other categories too in app, then send to controller
-    let queryUrl = `https://www.eventbriteapi.com/v3/events/search/?token=${key.API_KEY}&categories=110&price=paid${req.params.query}`;
+    let queryUrl = `https://www.eventbriteapi.com/v3/events/search/?token=${key.API_KEY}&categories=110&price=paid&sort_by=date${req.params.query}`;
 
     console.log("URL " + queryUrl);
 

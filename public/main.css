@@ -5,17 +5,19 @@ html, body{
 
 }
 .body{
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://www.caingram.info/Scotland/Glasgow/glasgow_map_3.jpg");
+    /* background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://www.caingram.info/Scotland/Glasgow/glasgow_map_3.jpg"); */
+    background-color: #E5EBED;
     min-height: 100%;
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
-    color: black;
-    font-family: Arial, Helvetica, sans-serif;
+    color: #4E5B60;
+    font-family: "Roboto", Helvetica, sans-serif;
 }
 
 .text{
    margin-bottom: 5px;
+   font-size: 1.5rem;
 }
 
 .button {
@@ -25,6 +27,7 @@ html, body{
     margin: 3px;
     padding: 5px;
     text-align: center;
+    font-size: 14pt;
 }
 
 input[type=text] {
