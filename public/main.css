@@ -15,12 +15,16 @@ html, body{
     font-family: "Roboto", Helvetica, sans-serif;
 }
 
+.pagination-container{
+    display: flex;
+}
+
 .text{
    margin-bottom: 5px;
    /* font-size: 1.5rem; */
 }
 
-.button {
+.tag-button {
     background-color: rgb(54, 97, 162);
     border: none;
     color: white;
@@ -55,9 +59,16 @@ input[type=submit] {
     margin: 1vw;
 }
 
+.main-content-wrapper{
+    display: flex;
+    flex-direction: column;
+    margin: 0 15% 0 15%;
+
+}
+
 .events-display{
     display: flex;
-    margin: 0 15% 0 15%;
+    /* margin: 0 15% 0 15%; */
     flex-wrap: wrap;
     flex-direction: column;
     justify-content: center;
@@ -97,6 +108,10 @@ input[type=submit] {
     margin: 5px;
     display: flex;
     flex-direction: row;
+}
+
+.pagination{
+    /* flex-direction: right; */
 }
 
 .more{
