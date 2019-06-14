@@ -1,12 +1,12 @@
 var express = require("express");
 
 var router = express.Router();
-var key= require("../server.js");
+var key = require("../server.js");
 
 // Our scraping tools
 // Axios is a promised-based http library, similar to jQuery's Ajax method
 // It works on the client and on the server
-// var axios = require("axios");
+var axios = require("axios");
 // var cheerio = require("cheerio");
 
 // Require all models
@@ -25,6 +25,35 @@ router.get("/scrape/:query", function(req, res) {
     console.log("Inside scrape")
     console.log(key.API_KEY);
     console.log("Params: " + req.params.query);
+
+    //Currently ONLY looking in the F&B Category (110)
+    // TODO, update to let you search by other categories too in app, then send to controller
+    let queryUrl = `https://www.eventbriteapi.com/v3/events/search/?token=${key.API_KEY}&categories=110&price=paid${req.params.query}`;
+
+    console.log("URL " + queryUrl);
+
+    let results;
+
+
+    //Make the API Call
+    axios.get(queryUrl).then(function(response){
+
+
+        //Print to console in nice format 
+        // console.log(JSON.stringify(response.data.events));
+
+        results = response.data.events;
+
+        console.log(results.length);
+
+        //Send results back to the client to display on page
+        res.send(results);
+
+    })
+
+
+
+    
 
     //   axios.get("https://techcrunch.com/").then(function(response) {
     //   // Then, we load that into cheerio and save it to $ for a shorthand selector
@@ -62,6 +91,7 @@ router.get("/scrape/:query", function(req, res) {
     //   // If we were able to successfully scrape and save an Article, send a message to the client
     //   res.send("Scrape Complete");
     // });
+
   });
 
   module.exports = router;

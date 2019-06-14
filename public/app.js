@@ -66,7 +66,55 @@ function displayResults(search, type, offset){
       })
         // With that done, add the note information to the page
         .then(function(data) {
-          console.log(data);
+            console.log("Back in app.js" + data);
+
+            data.forEach(function(item){
+
+
+                //Create variables
+                // let stillUrl = item.images.fixed_height_still.url;
+                // let movingUrl = item.images.fixed_height.url;
+                // let rating = item.rating;
+
+                    // let eventLogo= item.logo.original.url;
+
+                    if(item.logo) {let eventLogo= item.logo.original.url;}
+                    let eventName = item.name.text;
+                    let eventDate = item.start.local;
+                    let eventURL = item.url;
+
+                    console.log(eventURL);
+
+                    //Create a div to display the gif in 
+                    // let gifDiv = 
+                    // `<div class="gif">
+                    //     <img src="${stillUrl}" class="gif-image" id="gif-image" data-still="${stillUrl}" data-moving="${movingUrl}" data-motion="0">
+                    //     <p>Rating: ${rating}</p>
+                    // </div>`;
+
+
+                    //Create a div to display the gif in 
+                    let gifDiv = 
+                    `<div class="gif">
+                        <p>${eventName}</p>
+                        <p>${eventDate}</p>
+                        <p><a href="${eventURL}">Link</a></p>
+                    </div>`;
+
+                    // let gifDiv = 
+                    // `<div class="gif">
+                    //     <img src="${eventLogo}" class="gif-image" id="gif-image" data-motion="0">
+                    //     <p>${eventName}</p>
+                    //     <p>${eventDate}</p>
+                    //     <p><a href="${eventURL}">Link</a></p>
+                    // </div>`;
+
+
+                    //Append the div to the dom
+                    $("#images-display").prepend(gifDiv);
+
+            })
+
         })
 
 
